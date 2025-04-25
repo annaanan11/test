@@ -1,34 +1,80 @@
-<!-- Puzzle 1: 密室筆記 - 赫爾穆特 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>哨兵手記｜密室筆記</title>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
   <style>
-    body { background: #101010; color: #e0e0e0; font-family: monospace; padding: 2em; }
-    h1 { color: #f0a500; }
-    .note { border-left: 4px solid #f0a500; padding-left: 1em; margin: 1em 0; white-space: pre-wrap; }
-    .input-zone, .result { margin-top: 2em; }
-    input[type=text] { width: 80%; padding: 0.5em; }
-    button { padding: 0.5em 1em; margin-left: 1em; }
+    body {
+      background-color: #1e1e1c;
+      color: #eae0c8;
+      font-family: 'Special Elite', monospace;
+      padding: 3em;
+      background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+      background-repeat: repeat;
+    }
+    h1 {
+      color: #ff3c00;
+      text-transform: uppercase;
+      border-bottom: 2px solid #830000;
+      padding-bottom: 0.3em;
+      letter-spacing: 1px;
+    }
+    .note {
+      border-left: 4px solid #830000;
+      padding-left: 1em;
+      margin: 1.5em 0;
+      background: rgba(255, 255, 255, 0.03);
+      box-shadow: 2px 2px 12px rgba(0,0,0,0.3);
+      white-space: pre-wrap;
+    }
+    .input-zone, .result {
+      margin-top: 2em;
+    }
+    input[type=text] {
+      width: 70%;
+      padding: 0.5em;
+      background: #2a2a2a;
+      color: #eae0c8;
+      border: 1px solid #830000;
+      font-family: inherit;
+    }
+    button {
+      padding: 0.5em 1em;
+      margin-left: 1em;
+      background: #830000;
+      color: #fff;
+      border: none;
+      font-family: inherit;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
   </style>
 </head>
 <body>
   <h1>哨兵手記</h1>
-  <p>閱讀以下筆記內容，並找出赫爾穆特什麼時候開始出現記憶錯亂：</p>
+  <p>閱讀以下筆記內容，找出赫爾穆特從哪一天開始記憶錯亂：</p>
+
   <div class="note">
 Day 12 - 晚上23:15：路線清晰，走廊靜寂。
+
 Day 13 - 晚上23:15：我記得今天有衛兵換崗，但沒見到任何人。
+
 Day 14 - 晚上23:15：我照樣完成巡邏，只是......我想不起我是怎麼走完那條走廊的。
+
 Day 15 - 晚上23:15：我走進走廊，看到前方有個人。
+
 Day 15 - 晚上23:15：我走進走廊，看到前方有個人。
+
 Day 16 - 晚上23:15：那人仍站在鏡前，盯著我。陌生而熟悉。
   </div>
+
   <div class="input-zone">
-    <label>請輸入他哪一天開始記憶錯亂（例如：Day 13）：</label><br>
+    <label>請輸入他哪一天開始記憶錯亂（例如：Day 14）：</label><br>
     <input type="text" id="answer1">
     <button onclick="check1()">提交</button>
   </div>
+
   <div id="result1" class="result"></div>
 
   <script>
@@ -37,7 +83,7 @@ Day 16 - 晚上23:15：那人仍站在鏡前，盯著我。陌生而熟悉。
       if (ans.includes("day 14")) {
         document.getElementById("result1").innerHTML = "✅ 正確！暗號片段：<code>...</code>";
       } else {
-        document.getElementById("result1").innerHTML = "❌ 再想想，他開始無法記得怎麼完成巡邏是哪一天？";
+        document.getElementById("result1").innerHTML = "❌ 再想想。他什麼時候開始無法記得自己怎麼巡邏？";
       }
     }
   </script>
