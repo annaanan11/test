@@ -1,79 +1,43 @@
+<!-- Puzzle 1: 密室筆記 - 赫爾穆特 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>哨兵手記｜密室筆記</title>
   <style>
-    body {
-      background: #f5f0e6;
-      color: #222;
-      font-family: 'Courier New', Courier, monospace;
-      padding: 3em;
-      line-height: 1.7;
-      background-image: linear-gradient(to bottom, #f5f0e6 0%, #e7e2d5 100%);
-    }
-    h1 {
-      color: #3a2f1e;
-      border-bottom: 1px solid #aaa;
-      padding-bottom: 0.3em;
-    }
-    .note {
-      border-left: 4px double #6e5840;
-      padding-left: 1em;
-      margin: 1.5em 0;
-      background: rgba(255,255,255,0.5);
-      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-      white-space: pre-wrap;
-    }
-    .input-zone, .result {
-      margin-top: 2em;
-    }
-    input[type=text] {
-      width: 70%;
-      padding: 0.5em;
-      background: #fffef9;
-      border: 1px solid #999;
-      font-family: inherit;
-    }
-    button {
-      padding: 0.5em 1em;
-      margin-left: 1em;
-      background: #3a2f1e;
-      color: #fff;
-      border: none;
-      font-family: inherit;
-      cursor: pointer;
-    }
+    body { background: #101010; color: #e0e0e0; font-family: monospace; padding: 2em; }
+    h1 { color: #f0a500; }
+    .note { border-left: 4px solid #f0a500; padding-left: 1em; margin: 1em 0; white-space: pre-wrap; }
+    .input-zone, .result { margin-top: 2em; }
+    input[type=text] { width: 80%; padding: 0.5em; }
+    button { padding: 0.5em 1em; margin-left: 1em; }
   </style>
 </head>
 <body>
   <h1>哨兵手記</h1>
-  <p>閱讀以下筆記內容，找出赫爾穆特從哪一天開始記憶錯亂：</p>
-
+  <p>閱讀以下筆記內容，並找出赫爾穆特什麼時候開始出現記憶錯亂：</p>
   <div class="note">
-Day 12 - 晚上23:15：路線清晰，走廊靜寂。\n
-Day 13 - 晚上23:15：我記得今天有衛兵換崗，但沒見到任何人。\n
-Day 14 - 晚上23:15：我照樣完成巡邏，只是......我想不起我是怎麼走完那條走廊的。\n
-Day 15 - 晚上23:15：我走進走廊，看到前方有個人。\n
-Day 15 - 晚上23:15：我走進走廊，看到前方有個人。\n
+Day 12 - 晚上23:15：路線清晰，走廊靜寂。
+Day 13 - 晚上23:15：我記得今天有衛兵換崗，但沒見到任何人。
+Day 14 - 晚上23:15：我照樣完成巡邏，只是......我想不起我是怎麼走完那條走廊的。
+Day 15 - 晚上23:15：我走進走廊，看到前方有個人。
+Day 15 - 晚上23:15：我走進走廊，看到前方有個人。
 Day 16 - 晚上23:15：那人仍站在鏡前，盯著我。陌生而熟悉。
   </div>
-
   <div class="input-zone">
-    <label>請輸入他哪一天開始記憶錯亂（例如：Day 14）：</label><br>
+    <label>請輸入他哪一天開始記憶錯亂（例如：Day 13）：</label><br>
     <input type="text" id="answer1">
     <button onclick="check1()">提交</button>
   </div>
-
   <div id="result1" class="result"></div>
 
   <script>
     function check1() {
       const ans = document.getElementById("answer1").value.trim().toLowerCase();
       if (ans.includes("day 14")) {
-        document.getElementById("result1").innerHTML = \"✅ 正確！暗號片段：<code>...</code>\";
+        document.getElementById("result1").innerHTML = "✅ 正確！暗號片段：<code>...</code>";
       } else {
-        document.getElementById("result1").innerHTML = \"❌ 再想想。他什麼時候開始無法記得自己怎麼巡邏？\";
+        document.getElementById("result1").innerHTML = "❌ 再想想，他開始無法記得怎麼完成巡邏是哪一天？";
       }
     }
   </script>
