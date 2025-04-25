@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>哨兵手記｜密室筆記</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>代號破譯｜密碼解碼</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
   <style>
     body {
       background-color: #1e1e1c;
       color: #eae0c8;
       font-family: 'Special Elite', monospace;
-      padding: 3em;
+      padding: 2em 1em;
+      margin: 0;
       background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
       background-repeat: repeat;
     }
@@ -19,6 +21,10 @@
       border-bottom: 2px solid #830000;
       padding-bottom: 0.3em;
       letter-spacing: 1px;
+      font-size: 1.5em;
+    }
+    p {
+      line-height: 1.6;
     }
     .note {
       border-left: 4px solid #830000;
@@ -32,59 +38,94 @@
       margin-top: 2em;
     }
     input[type=text] {
-      width: 70%;
-      padding: 0.5em;
+      width: 100%;
+      padding: 0.6em;
       background: #2a2a2a;
       color: #eae0c8;
       border: 1px solid #830000;
       font-family: inherit;
+      box-sizing: border-box;
+      font-size: 1em;
     }
     button {
-      padding: 0.5em 1em;
-      margin-left: 1em;
+      width: 100%;
+      margin-top: 1em;
+      padding: 0.6em;
       background: #830000;
       color: #fff;
       border: none;
       font-family: inherit;
       cursor: pointer;
       text-transform: uppercase;
+      font-size: 1em;
+    }
+    .log {
+      margin-top: 1.5em;
+      background: #2a2a2a;
+      padding: 1em;
+      font-size: 0.95em;
+      max-height: 300px;
+      overflow-y: auto;
+      border-left: 3px solid #444;
     }
   </style>
 </head>
 <body>
-  <h1>哨兵手記</h1>
-  <p>閱讀以下筆記內容，找出赫爾穆特從哪一天開始記憶錯亂：</p>
-
-  <div class="note">
-Day 12 - 晚上23:15：路線清晰，走廊靜寂。
-
-Day 13 - 晚上23:15：我記得今天有衛兵換崗，但沒見到任何人。
-
-Day 14 - 晚上23:15：我照樣完成巡邏，只是......我想不起我是怎麼走完那條走廊的。
-
-Day 15 - 晚上23:15：我走進走廊，看到前方有個人。
-
-Day 15 - 晚上23:15：我走進走廊，看到前方有個人。
-
-Day 16 - 晚上23:15：那人仍站在鏡前，盯著我。陌生而熟悉。
-  </div>
+  <h1>代號破譯任務</h1>
+  <p>我們截獲了一組神秘的 4 位數密碼（無重複），你只有 10 次機會猜出正確代碼。每次會顯示幾 A 幾 B。破解後可取得暗號片段。</p>
 
   <div class="input-zone">
-    <label>請輸入他哪一天開始記憶錯亂（例如：Day 14）：</label><br>
-    <input type="text" id="answer1">
-    <button onclick="check1()">提交</button>
+    <input type="text" id="guess" maxlength="4" placeholder="輸入 4 位不重複數字...">
+    <button onclick="submitGuess()">提交猜測</button>
   </div>
 
-  <div id="result1" class="result"></div>
+  <div class="log" id="log"></div>
+  <div class="result" id="result"></div>
 
   <script>
-    function check1() {
-      const ans = document.getElementById("answer1").value.trim().toLowerCase();
-      if (ans.includes("day 14")) {
-        document.getElementById("result1").innerHTML = "✅ 正確！暗號片段：<code>...</code>";
-      } else {
-        document.getElementById("result1").innerHTML = "❌ 再想想。他什麼時候開始無法記得自己怎麼巡邏？";
+    const code = generateCode();
+    let attempts = 0;
+    const maxAttempts = 10;
+
+    function generateCode() {
+      let digits = [...Array(10).keys()];
+      let result = '';
+      for (let i = 0; i < 4; i++) {
+        const index = Math.floor(Math.random() * digits.length);
+        result += digits.splice(index, 1)[0];
       }
+      return result;
+    }
+
+    function submitGuess() {
+      const input = document.getElementById("guess").value.trim();
+      const log = document.getElementById("log");
+      const result = document.getElementById("result");
+
+      if (!/^\d{4}$/.test(input) || new Set(input).size !== 4) {
+        result.innerHTML = "❌ 請輸入 4 位不重複數字。";
+        return;
+      }
+
+      attempts++;
+      let A = 0, B = 0;
+      for (let i = 0; i < 4; i++) {
+        if (input[i] === code[i]) A++;
+        else if (code.includes(input[i])) B++;
+      }
+
+      const feedback = `${input} → ${A}A${B}B`;
+      log.innerHTML += feedback + "<br>";
+
+      if (A === 4) {
+        result.innerHTML = "✅ 成功破解！暗號片段：<code>...</code>";
+      } else if (attempts >= maxAttempts) {
+        result.innerHTML = `💀 任務失敗。正確答案是 ${code}`;
+      } else {
+        result.innerHTML = `剩餘次數：${maxAttempts - attempts}`;
+      }
+
+      document.getElementById("guess").value = '';
     }
   </script>
 </body>
